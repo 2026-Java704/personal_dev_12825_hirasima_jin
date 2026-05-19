@@ -7,6 +7,23 @@
 <body>
 	<h1>レシピ一覧</h1>
 	
+	[[${@account.name}]]さん、ようこそ
+	<br><br>
+	
+	<!--検索-->
+	<form action="/recipes" method="get">
+		<input type="text" name="keyword" placeholder="料理名検索" th:value="${keyword}">
+		<button>検索</button>
+		<br>
+	</form>
+	
+	<!--カテゴリー-->
+	<span th:each="category:${categories}">
+	<form action="/recipes" method="get">
+		<input type="hidden" name="categoryId" th:value="${category.id}">
+		<button th:text="$[category.name]"></button>
+	</form>
+	</span>
 	
 	<table border="1" th:each="recipe:${recipes}">
 		<tr>

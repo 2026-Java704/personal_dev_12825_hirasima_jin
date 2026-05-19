@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,16 +12,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.User;
+import com.example.demo.model.Account;
 import com.example.demo.repository.UserRepository;
 
 @Controller
 public class UserController 
 {
+	private final HttpSession session;
+	private final Account account;
 	private final UserRepository userRepository;
 	
 	//コンストラクタインジェクション
-	public UserController (UserRepository userRepository)
+	public UserController (HttpSession session, Account account, UserRepository userRepository)
 	{
+		this.session = session;
+	    this.account = account;
 		this.userRepository = userRepository;
 	}
 	
@@ -27,6 +34,9 @@ public class UserController
 	@GetMapping({"/", "/login", "logout"})
 	public String index()
 	{
+		//セッション情報破棄
+		session.invalidate();
+		
 		return "login";
 	}
 	
@@ -62,6 +72,13 @@ public class UserController
 		}
 		
 		// -------------------------- //
+		
+		//ログインさせるUser
+		User user = userList.getFirst();
+		
+		//セッションにログイン情報を設定
+		account.setName(user.getName());
+		account.setId(user.getId());
 		
 		return "redirect:/recipes";
 	}
