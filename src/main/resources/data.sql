@@ -6,6 +6,13 @@ INSERT INTO users(name, email, password) VALUES('鈴木一郎', 'suzuki@aaa.com'
 INSERT INTO categories(name) VALUES('丼もの');
 INSERT INTO categories(name) VALUES('麵類');
 INSERT INTO categories(name) VALUES('デザート');
+INSERT INTO categories(name) VALUES('肉料理');
+INSERT INTO categories(name) VALUES('スープ');
+INSERT INTO categories(name) VALUES('サラダ');
+INSERT INTO categories(name) VALUES('魚介');
+INSERT INTO categories(name) VALUES('パン');
+INSERT INTO categories(name) VALUES('鍋もの');
+INSERT INTO categories(name) VALUES('粉もの');
 
 ---- レシピテーブル --
 INSERT INTO recipes(user_id, category_id, name, recipe) VALUES(1, 1, '親子丼', '親子丼の作り方');

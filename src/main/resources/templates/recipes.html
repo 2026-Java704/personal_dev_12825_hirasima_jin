@@ -21,9 +21,11 @@
 	<span th:each="category:${categories}">
 	<form action="/recipes" method="get">
 		<input type="hidden" name="categoryId" th:value="${category.id}">
-		<button th:text="$[category.name]"></button>
+		<button th:text="${category.name}"></button>
+		<br th:if="${category.id % 5 == 0}">
 	</form>
 	</span>
+	<br>
 	
 	<table border="1" th:each="recipe:${recipes}">
 		<tr>

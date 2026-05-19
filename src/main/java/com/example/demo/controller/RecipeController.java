@@ -32,7 +32,7 @@ public class RecipeController
 			Model model)
 	{
 		//キーワード絞り込み検索
-		List<Recipe> recipes = recipeRepository.findByKeyword(keyword);
+		List<Recipe> recipes = recipeRepository.findByKeywordAndCategoryId(keyword, categoryId);
 		model.addAttribute("recipes", recipes);
 		//全カテゴリー情報を取得
 		List<Category> categories = categoryRepository.findAll();

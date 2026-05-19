@@ -10,7 +10,13 @@ import com.example.demo.entity.Recipe;
 
 public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 {
-	@Query(value = "SELECT * FROM recipes WHERE name LIKE '%'||:keyword||'%' OR :keyword = ''"
+	@Query(value = "SELECT * FROM recipes WHERE "
+			+ "(name LIKE '%'||:keyword||'%' OR :keyword = '') "
+			+ "AND (category_id = :categoryId OR :categoryId IS NULL)"
 			, nativeQuery = true)
-	List<Recipe> findByKeyword(@Param("keyword") String keyword);
+	List<Recipe> findByKeywordAndCategoryId(
+			@Param("keyword") String keyword,
+			@Param("categoryId") Integer categoryId);
+
+	
 }
