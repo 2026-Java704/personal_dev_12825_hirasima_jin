@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/* 全体 */
+body
+{
+	background-color: #EFF0F7; /* 背景色  */
+	text-align: center; /* 中央寄せ */
+    min-width: 900px; /* 最小幅 */
+}
+
+/* ヘッダー、ナビゲーションメニュー、フッター */
+header, nav, footer 
+{
+	background-color: rgb(192, 192, 192); /* 背景色 */
+	color: rgb(71, 71, 71); /* 文字色 */
+	padding-top: 5px; /* 内側余白(上) */
+	padding-bottom: 5px; /* 内側余白(下) */
+}
+
+/* ヘッダー内見出し */
+header h1 
+{
+	font-size: 20pt;
+	margin: 10px auto;
+}
+
+/* 表 */
+table 
+{
+    margin: 5px auto;
+    min-width: 800px;
+}
+
+/* 表線 */
+table, th, td 
+{
+	border-collapse: collapse;
+	border: 1px solid #7d8bae;
+}
+
+/* 送信ボタン */
+button 
+{
+	margin: 2px;
+	padding: 5px 20px;
+	background-color:rgb(255, 128, 0);
+	color: #ffffff;
+	border: none;
+	width:150px;
+	
+}
+
+/* 送信ボタン(マウスオーバー時) */
+button:hover 
+{
+	background-color: #f1b2b2;
+	cursor: pointer;	//カーソル変更
+}
