@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>レシピ投稿</title>
+</head>
+<body>
+	<header th:replace="~{header}"></header>
+	
+	<h1>レシピ投稿</h1>
+	
+	<form action="/recipes/add" method="post">
+		<input type="text" name="name" placeholder="料理名">
+		<br>
+		カテゴリー
+		<br>
+		<select name="categoryId">
+			<option th:each="category:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+		</select>
+		<br>
+		レシピ内容
+		<br>
+		<textarea name="recipeDetail"></textarea>
+		<br>
+		<input type="hidden" name="userId" th:value="${@account.id}">
+		<button>投稿</button>
+	</form>
+</body>
+</html>

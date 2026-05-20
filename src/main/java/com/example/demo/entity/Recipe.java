@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,11 +20,11 @@ public class Recipe
 	private String name; //料理名
 	private String recipe; //レシピ内容
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
@@ -53,7 +53,7 @@ public class Recipe
 	}
 	
 	public String getRecipe() {
-		return recipe;
+		return recipe.replaceAll("\n", "<br>");
 	}
 	
 	public void setRecipe(String recipe) {

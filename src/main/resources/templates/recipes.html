@@ -5,10 +5,9 @@
 <title>レシピ一覧</title>
 </head>
 <body>
-	<h1>レシピ一覧</h1>
+	<header th:replace="~{header}"></header>
 	
-	[[${@account.name}]]さん、ようこそ
-	<br><br>
+	<h1>レシピ一覧</h1>
 	
 	<!--検索-->
 	<form action="/recipes" method="get">
