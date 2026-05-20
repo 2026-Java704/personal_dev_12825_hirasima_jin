@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${recipe.name}"></title>
+</head>
+<body>
+	<h1 th:text="${recipe.name}"></h1>
+	
+	<span>
+		カテゴリー：[[${recipe.category.name}]]
+	</span>
+	<br>
+	<span th:text="${recipe.recipe}"></span>
+</body>
+</html>
