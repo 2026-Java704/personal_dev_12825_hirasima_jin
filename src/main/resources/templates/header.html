@@ -1,19 +1,12 @@
 <header>
-	<table>
-		<tr>
-			<td>
-				[[${@account.name}]]さん、ようこそ
-			</td>
-			<td>
-				<form action="/recipes/add" method="get">
-					<button>投稿</button>
-				</form>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="/logout">ログアウト</a>
-			</td>
-		</tr>
-	</table>
+	
+	<h1>[[${@account.name}]]さん、ようこそ</h1>
+	
+	<a href="/logout">ログアウト</a>
+	
+	<post>
+		<form action="/recipes/add" method="get">
+			<button>投稿</button>
+		</form>
+	</post>
 </header>

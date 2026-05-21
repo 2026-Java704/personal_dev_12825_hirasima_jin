@@ -18,29 +18,39 @@
 	</form>
 	
 	<!--カテゴリー-->
-	<table>
-		<tr>
-			<td>
-				<form action="/recipes" method="get">
-					<button>全選択</button>
-				</form>
-			</td>
-			<td  th:each="category:${categories}">
-				<form action="/recipes" method="get">
-					<input type="hidden" name="categoryId" th:value="${category.id}">
-					<button th:text="${category.name}"></button>
-				</form>
-			</td>
-		</tr>
-	</table>
+	<categories>
+<!--	<table>-->
+<!--		<tr>-->
+<!--			<td>-->
+<!--				<form action="/recipes" method="get">-->
+<!--					<button>全選択</button>-->
+<!--				</form>-->
+<!--			</td>-->
+<!--			<td th:each="category:${categories}">-->
+<!--				<form action="/recipes" method="get">-->
+<!--					<input type="hidden" name="categoryId" th:value="${category.id}">-->
+<!--					<button th:text="${category.name}"></button>-->
+<!--				</form>-->
+<!--			</td>-->
+<!--		</tr>-->
+<!--	</table>-->
+	<a href="/recipes">全選択</a>
+	<n th:each="category:${categories}">
+		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
+	</n>
+	</categories>
 	<br>
 	
+	<recipes>
 	<table th:each="recipe:${recipes}">
 		<tr>
 			<td>
 				<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
+				<br>
+				<span> 投稿者： [[${recipe.user.name}]] </span>
 			</td>
 		</tr>
 	</table>
+	</recipes>
 </body>
 </html>
