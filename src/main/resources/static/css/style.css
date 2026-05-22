@@ -3,7 +3,7 @@
 /* 全体 */
 body
 {
-	background-color: #EFF0F7; /* 背景色  */
+	background-color: rgb(230, 230, 200); /* 背景色  */
 	text-align: center; /* 中央寄せ */
     min-width: 900px; /* 最小幅 */
 }
@@ -11,8 +11,8 @@ body
 /* ヘッダー、ナビゲーションメニュー、フッター */
 header, nav, footer 
 {
-	background-color: rgb(255, 255, 255); /* 背景色 */
-	color: rgb(29, 29, 29); /* 文字色 */
+	background-color: rgb(240, 60, 60); /* 背景色 */
+	color: rgb(30, 30, 30); /* 文字色 */
 	padding-top: 5px; /* 内側余白(上) */
 	padding-bottom: 5px; /* 内側余白(下) */
 }
@@ -39,17 +39,27 @@ table, th, td
 	border: 1px solid #7d8bae;
 }
 
+/*カテゴリー検索欄*/
+categories
+{
+	display: -webkit-flex;
+	flex-direction: row;	
+	justify-content: center;
+}
+
 /*カテゴリー検索リンク*/
 categories a
 {
-/*	display: flex;*/
-/*	justify-content: center;*/
-/*	align-items: center;*/
-	position: relative;
-	min-width: 400px;
-	min-height: 100px;
-	color: #333;
-	background-color: rgb(255, 128, 0);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+/*	position: relative;*/
+	margin: 3px;
+	width: 80px;
+	height: 40px;
+	color: rgb(240, 240, 240);
+	background-color:rgb(240, 100, 100);
+	border-radius: 5px;
 	font-size: 18px;
 	font-weight: 700;
 	text-decoration: none;
@@ -59,7 +69,7 @@ categories a
 /*カテゴリー検索リンク(マウスオーバー時)*/
 categories a:hover
 {
-	color: rgb(0, 0, 0);
+	color: rgb(30, 30, 30);
 	background-color: rgb(255, 185, 115);
 }
 
@@ -74,26 +84,24 @@ recipes table
 /*レシピ一覧表内リンク*/
 recipes table a
 {
-	font-size: 30px;
-	text-align: center;
-	vertical-align: 20px;
 	width: 300px;
 	height: 60px;
 	color: rgb(51, 51, 51);
-	font-size: 18px;
-	font-weight: 700;
 	text-decoration: none;
 	transition: 0.3s;
 }
 
-/*レシピ一覧表内リンク(マウスオーバー時)*/
-recipes table a:hover
+/*レシピ詳細リンク*/
+recipes table recipe a
 {
-	color: rgb(255, 128, 0);
+	font-size: 30px;
+	text-align: center;
+	vertical-align: 20px;
+	font-weight: 700;
 }
 
-/*レシピ一覧表内テキスト*/
-recipes table span
+/*レシピユーザー詳細リンク*/
+recipes table user a
 {
 	font-size: 15px;
 	text-align: center;
@@ -101,24 +109,33 @@ recipes table span
 	color: rgb(51, 51, 51);
 }
 
-/*送信ボタン*/
-post button
+/*レシピ一覧表内リンク(マウスオーバー時)*/
+recipes table a:hover
 {
-	margin-left: 90%;
-	background-color:rgb(255, 128, 0);
-	width:70px;
+	color: rgb(255, 128, 0);
+	background-color: rgb(255, 185, 115);
 }
 
-/* 送信ボタン */
+/*レシピ一覧表内テキスト*/
+recipes table div
+{
+	font-size: 15px;
+	text-align: center;
+	vertical-align:auto;
+	color: rgb(51, 51, 51);
+}
+
+/* ボタン */
 button 
 {
 	margin: 2px;
 	padding: 5px 20px;
-	background-color:rgb(255, 128, 0);
-	color: #ffffff;
+	background-color:rgb(240, 100, 100);
+	color: rgb(240, 240, 240);
 	border: none;
 	border-radius: 5px;
-	width:100px;
+	min-width:100px;
+	transition: 0.3s;
 }
 
 /* 送信ボタン(マウスオーバー時) */

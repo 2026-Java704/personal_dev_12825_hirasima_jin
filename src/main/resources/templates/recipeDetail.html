@@ -8,10 +8,20 @@
 <body>
 	<h1 th:text="${recipe.name}"></h1>
 	
+	<recipe>
+	<a th:href="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}">
+		投稿者：[[${recipe.user.name}]]
+	</a><br>
+	</recipe>
+	
 	<span>
 		カテゴリー：[[${recipe.category.name}]]
 	</span>
 	<br>
 	<span th:utext="${recipe.recipe}"></span>
+	
+	<form action="/recipes" method="get">
+		<button>一覧へ戻る</button>
+	</form>
 </body>
 </html>

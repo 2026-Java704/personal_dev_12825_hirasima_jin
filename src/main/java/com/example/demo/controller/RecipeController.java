@@ -66,10 +66,37 @@ public class RecipeController
 		return "recipeDetail";
 	}
 	
+	//レシピ詳細画面表示
+	@GetMapping("/recipes/user/detail/{id}")
+	public String userDetail(
+			@PathVariable int id,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "") Integer categoryId,
+			Model model)
+	{
+		//表示するユーザー
+		User user = userRepository.findById(id).get();
+		model.addAttribute("user", user);
+		
+		//全カテゴリー情報を取得
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		
+		//表示するユーザーが投稿したレシピ
+		List<Recipe> recipes = recipeRepository.findByUserId(id, keyword, categoryId);
+		model.addAttribute("recipes", recipes);
+		
+		model.addAttribute("keyword", keyword);
+		
+		return "userDetail";
+	}
+	
 	//レシピ投稿画面表示
 	@GetMapping("/recipes/add")
 	public String create(Model model)
 	{
+		
+		
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 		

@@ -18,39 +18,31 @@
 	</form>
 	
 	<!--カテゴリー-->
-	<categories>
-<!--	<table>-->
-<!--		<tr>-->
-<!--			<td>-->
-<!--				<form action="/recipes" method="get">-->
-<!--					<button>全選択</button>-->
-<!--				</form>-->
-<!--			</td>-->
-<!--			<td th:each="category:${categories}">-->
-<!--				<form action="/recipes" method="get">-->
-<!--					<input type="hidden" name="categoryId" th:value="${category.id}">-->
-<!--					<button th:text="${category.name}"></button>-->
-<!--				</form>-->
-<!--			</td>-->
-<!--		</tr>-->
-<!--	</table>-->
+	<categories>	
 	<a href="/recipes">全選択</a>
-	<n th:each="category:${categories}">
-		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
-	</n>
-	</categories>
-	<br>
 	
+	<span th:each="category:${categories}">
+		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
+		<br th:if="${category.id} % 4 == 0">
+	</span>
+	</categories>
+
 	<recipes>
 	<table th:each="recipe:${recipes}">
 		<tr>
-			<td>
+			<td><recipe>
 				<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
+				</recipe>
 				<br>
-				<span> 投稿者： [[${recipe.user.name}]] </span>
+				<user>
+					<a th:href="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}">
+						投稿者：[[${recipe.user.name}]]
+					</a>
+				</user>
 			</td>
 		</tr>
 	</table>
 	</recipes>
+		
 </body>
 </html>

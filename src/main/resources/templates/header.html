@@ -1,12 +1,29 @@
 <header>
 	
-	<h1>[[${@account.name}]]さん、ようこそ</h1>
-	
-	<a href="/logout">ログアウト</a>
-	
-	<post>
-		<form action="/recipes/add" method="get">
-			<button>投稿</button>
+	<isLogin th:if="${@account.name} != null AND ${@account.id} != null">
+		<h1>[[${@account.name}]]さん、ようこそ</h1>
+		<form action="/logout" method="get">
+			<button>ログアウト</button>
 		</form>
-	</post>
+		
+		<post>
+			<form action="/recipes/add" method="get">
+				<button>投稿</button>
+			</form>
+		</post>
+	</isLogin>
+	
+	<isLogout th:if="${@account.name} == null OR  ${@account.id} == null">
+		<h1>ゲストさん、ようこそ</h1>
+		<form action="/login" method="get">
+			<button>ログイン</button>
+		</form>
+		
+		<post>
+			<form action="/login" method="get">
+				<button>投稿</button>
+			</form>
+		</post>
+	</isLogout>
+	
 </header>

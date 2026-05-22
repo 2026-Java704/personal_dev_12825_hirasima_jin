@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> [[${user.name}]] </title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="~{header}"></header>
+	
+	<h1>[[${user.name}]]さんのページ</h1>
+	
+	<form action="/recipes" method="get">
+		<button>一覧へ戻る</button>
+	</form>
+	
+	<!--検索-->
+	<form th:action="@{/recipes/user/detail/{id}(id = ${user.id})}" method="get">
+		<input type="text" name="keyword" placeholder="料理名検索" th:value="${keyword}">
+		<button>検索</button>
+		<br>
+	</form>
+	
+	<!--カテゴリー-->
+	<categories>	
+	<a th:href="@{/recipes/user/detail/{id}(id = ${user.id})}">全選択</a>
+	
+	<span th:each="category:${categories}">
+		<a th:href="@{/recipes/user/detail/{id}?categoryId={cId}(id = ${user.id},cId = ${category.id})}" 
+		th:text="${category.name}"></a>
+	</span>
+	</categories>
+	<br>
+	
+	<recipes>
+		<table th:each="recipe:${recipes}">
+			<tr>
+				<td>
+					<recipe>
+					<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
+					</recipe>
+				</td>
+			</tr>
+		</table>
+		</recipes>
+	
+</body>
+</html>

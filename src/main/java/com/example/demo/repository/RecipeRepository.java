@@ -10,6 +10,7 @@ import com.example.demo.entity.Recipe;
 
 public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 {
+	//キーボード＆カテゴリー検索
 	@Query(value = "SELECT * FROM recipes WHERE "
 			+ "(name LIKE '%'||:keyword||'%' OR :keyword = '') "
 			+ "AND (category_id = :categoryId OR :categoryId IS NULL)"
@@ -18,5 +19,14 @@ public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 			@Param("keyword") String keyword,
 			@Param("categoryId") Integer categoryId);
 
-	
+	//特定ユーザーIdによるキーボード＆カテゴリー検索
+	@Query(value = "SELECT * FROM recipes WHERE "
+			+ "(user_id = :userId) "
+			+ "AND(name LIKE '%'||:keyword||'%' OR :keyword = '') "
+			+ "AND (category_id = :categoryId OR :categoryId IS NULL)"
+			, nativeQuery = true)
+	List<Recipe> findByUserId(
+			@Param("userId") Integer userId,
+			@Param("keyword") String keyword,
+			@Param("categoryId") Integer categoryId);
 }
