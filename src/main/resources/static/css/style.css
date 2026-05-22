@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 全体 */
-body
+body:not(.recipeDetail)
 {
 	background-color: rgb(230, 230, 200); /* 背景色  */
 	text-align: center; /* 中央寄せ */
@@ -12,9 +12,14 @@ body
 header, nav, footer 
 {
 	background-color: rgb(240, 60, 60); /* 背景色 */
-	color: rgb(30, 30, 30); /* 文字色 */
+	color: rgb(230, 230, 230); /* 文字色 */
 	padding-top: 5px; /* 内側余白(上) */
 	padding-bottom: 5px; /* 内側余白(下) */
+}
+
+h1:not(header h1)
+{
+	color: rgb(51, 51, 51);
 }
 
 /* ヘッダー内見出し */
@@ -37,6 +42,7 @@ table, th, td
 	border-collapse: collapse;
 	border-radius: 5px;
 	border: 1px solid #7d8bae;
+	border-radius: 5px;
 }
 
 /* ボタン */
@@ -60,6 +66,11 @@ button:hover
 	color: rgb(30, 30, 30);
 	background-color: #f1b2b2;
 	cursor: pointer;	/*カーソル変更*/
+}
+
+a
+{
+	text-decoration: none;
 }
 
 /*テキスト入力欄*/
@@ -99,13 +110,17 @@ textarea
 /*カテゴリー検索欄*/
 categories
 {
+    display: inline;
 	display: -webkit-flex;
-    display: flex;
+	flex-wrap: wrap;
+	margin-inline: auto;
     -webkit-justify-content: center;
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
 	background-color: #f1b2b2;
+	max-width: 650px;
+	border-radius: 5px;
 }
 
 /*カテゴリー検索リンク*/
@@ -113,8 +128,6 @@ categories a
 {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	position: relative;
 	margin: 3px;
 	width: 80px;
 	height: 30px;
@@ -123,7 +136,6 @@ categories a
 	border-radius: 5px;
 	font-size: 18px;
 	font-weight: 700;
-	text-decoration: none;
 	transition: 0.3s;
 }
 
@@ -148,7 +160,6 @@ recipes table a
 	width: 300px;
 	height: 60px;
 	color: rgb(51, 51, 51);
-	text-decoration: none;
 	transition: 0.3s;
 }
 
@@ -162,7 +173,7 @@ recipes table recipe a
 }
 
 /*レシピユーザー詳細リンク*/
-recipes table user a
+userName a
 {
 	font-size: 15px;
 	text-align: center;
@@ -171,10 +182,10 @@ recipes table user a
 }
 
 /*レシピ一覧表内リンク(マウスオーバー時)*/
-recipes table a:hover
+a:hover
 {
 	color: rgb(30, 30, 30);
-	background-color: #f1b2b2;
+	background-color: rgb(200, 200, 180)
 }
 
 /*レシピ一覧表内テキスト*/
@@ -186,8 +197,16 @@ recipes table div
 	color: rgb(51, 51, 51);
 }
 
+/*レシピ詳細表示表*/
+Detail table td, th
+{
+	min-width: 200px;
+}
+
 /*レシピ詳細テキスト*/
 .recipeDetail
 {
+	padding: 10px;
+	text-align: left;
 	
 }

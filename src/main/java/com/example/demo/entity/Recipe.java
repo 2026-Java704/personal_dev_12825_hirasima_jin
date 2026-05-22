@@ -18,6 +18,7 @@ public class Recipe
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; //レシピID
 	private String name; //料理名
+	private String material; //材料
 	private String recipe; //レシピ内容
 	
 	@ManyToOne
@@ -35,9 +36,10 @@ public class Recipe
 	{
 		
 	}
-	public Recipe(String name, String recipe, User user, Category category)
+	public Recipe(String name, String material, String recipe, User user, Category category)
 	{
 		this.name = name;
+		this.material = material;
 		this.recipe = recipe;
 		this.user = user;
 		this.category = category;
@@ -79,4 +81,13 @@ public class Recipe
 	public Integer getId() {
 		return id;
 	}
+	public String getMaterial() {
+		return material.replaceAll("\n", "<br>");
+	}
+	
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+	
+	
 }

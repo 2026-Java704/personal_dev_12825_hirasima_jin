@@ -27,5 +27,6 @@ CREATE TABLE recipes
    user_id INTEGER REFERENCES users(id),
    category_id INTEGER REFERENCES categories(id),
    name VARCHAR(50),
+   material TEXT,
    recipe TEXT
 );

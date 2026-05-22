@@ -108,6 +108,7 @@ public class RecipeController
 	public String add(
 			@RequestParam(defaultValue = "") String name,
 			@RequestParam(defaultValue = "") Integer categoryId,
+			@RequestParam(defaultValue = "") String material,
 			@RequestParam(defaultValue = "") String recipeDetail,
 			@RequestParam(defaultValue = "") Integer userId)
 	{
@@ -116,7 +117,7 @@ public class RecipeController
 		Category category = categoryRepository.findById(categoryId).get();
 		
 		//投稿するレシピ
-		Recipe recipe = new Recipe(name, recipeDetail, user, category);
+		Recipe recipe = new Recipe(name, material, recipeDetail, user, category);
 		
 		recipeRepository.save(recipe);
 		

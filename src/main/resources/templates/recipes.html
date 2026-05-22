@@ -12,7 +12,7 @@
 	
 	<!--検索-->
 	<form action="/recipes" method="get">
-		<input type="text" class="textBox" name="keyword" placeholder="料理名検索" th:value="${keyword}">
+		<input type="text" class="textBox" name="keyword" placeholder="料理名または材料名" th:value="${keyword}">
 		<button>検索</button>
 		<br>
 	</form>
@@ -21,11 +21,7 @@
 	<categories>
 	<a href="/recipes">全選択</a>
 	
-	<category th:each="category:${categories}" th:if="${category.id} <= 7">
-		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
-	</category>
-	<br>
-	<category th:each="category:${categories}" th:if="${category.id} > 7">
+	<category th:each="category:${categories}">
 		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
 	</category>
 	</categories>
@@ -37,11 +33,11 @@
 				<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
 				</recipe>
 				<br>
-				<user>
+				<userName>
 					<a th:href="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}">
 						投稿者：[[${recipe.user.name}]]
 					</a>
-				</user>
+				</userName>
 			</td>
 		</tr>
 	</table>
