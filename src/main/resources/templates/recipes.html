@@ -12,19 +12,22 @@
 	
 	<!--検索-->
 	<form action="/recipes" method="get">
-		<input type="text" name="keyword" placeholder="料理名検索" th:value="${keyword}">
+		<input type="text" class="textBox" name="keyword" placeholder="料理名検索" th:value="${keyword}">
 		<button>検索</button>
 		<br>
 	</form>
 	
 	<!--カテゴリー-->
-	<categories>	
+	<categories>
 	<a href="/recipes">全選択</a>
 	
-	<span th:each="category:${categories}">
+	<category th:each="category:${categories}" th:if="${category.id} <= 7">
 		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
-		<br th:if="${category.id} % 4 == 0">
-	</span>
+	</category>
+	<br>
+	<category th:each="category:${categories}" th:if="${category.id} > 7">
+		<a th:href="@{/recipes?categoryId={id}(id = ${category.id})}" th:text="${category.name}"></a>
+	</category>
 	</categories>
 
 	<recipes>

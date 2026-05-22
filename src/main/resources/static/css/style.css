@@ -39,12 +39,73 @@ table, th, td
 	border: 1px solid #7d8bae;
 }
 
+/* ボタン */
+button 
+{
+	margin: 2px;
+	padding: 5px 20px;
+	background-color:rgb(240, 100, 100);
+	color: rgb(240, 240, 240);
+	border: 1px solid rgb(240, 120, 120);
+	border-radius: 5px;
+	height: 30px;
+	width:120px;
+	font-weight: 700;
+	transition: 0.3s;
+}
+
+/* 送信ボタン(マウスオーバー時) */
+button:hover 
+{
+	color: rgb(30, 30, 30);
+	background-color: #f1b2b2;
+	cursor: pointer;	/*カーソル変更*/
+}
+
+/*テキスト入力欄*/
+.textBox
+{
+	width: 220px;
+	height: 20px;
+	padding: 5px 20px;
+	border-radius: 5px;
+	border: 2px solid #ccc
+}
+
+/*テキスト入力欄フォーカス時*/
+.textBox:focus
+{
+	outline: 0;
+	border: 2px solid #2196f3;
+}
+
+/*テキストエリア*/
+textarea
+{
+	width: 220px;
+	height: 100px;
+	padding: 5px 20px;
+	border-radius: 5px;
+	border: 2px solid #ccc
+}
+
+/*テキストエリアフォーカス時*/
+.textarea:focus
+{
+	outline: 0;
+	border: 2px solid #2196f3;
+}
+
 /*カテゴリー検索欄*/
 categories
 {
 	display: -webkit-flex;
-	flex-direction: row;	
-	justify-content: center;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+	background-color: #f1b2b2;
 }
 
 /*カテゴリー検索リンク*/
@@ -53,10 +114,10 @@ categories a
 	display: flex;
 	justify-content: center;
 	align-items: center;
-/*	position: relative;*/
+	position: relative;
 	margin: 3px;
 	width: 80px;
-	height: 40px;
+	height: 30px;
 	color: rgb(240, 240, 240);
 	background-color:rgb(240, 100, 100);
 	border-radius: 5px;
@@ -70,7 +131,7 @@ categories a
 categories a:hover
 {
 	color: rgb(30, 30, 30);
-	background-color: rgb(255, 185, 115);
+	background-color: #f1b2b2;
 }
 
 /*レシピ一覧表*/
@@ -112,8 +173,8 @@ recipes table user a
 /*レシピ一覧表内リンク(マウスオーバー時)*/
 recipes table a:hover
 {
-	color: rgb(255, 128, 0);
-	background-color: rgb(255, 185, 115);
+	color: rgb(30, 30, 30);
+	background-color: #f1b2b2;
 }
 
 /*レシピ一覧表内テキスト*/
@@ -125,22 +186,8 @@ recipes table div
 	color: rgb(51, 51, 51);
 }
 
-/* ボタン */
-button 
+/*レシピ詳細テキスト*/
+.recipeDetail
 {
-	margin: 2px;
-	padding: 5px 20px;
-	background-color:rgb(240, 100, 100);
-	color: rgb(240, 240, 240);
-	border: none;
-	border-radius: 5px;
-	min-width:100px;
-	transition: 0.3s;
-}
-
-/* 送信ボタン(マウスオーバー時) */
-button:hover 
-{
-	background-color: #f1b2b2;
-	cursor: pointer;	/*カーソル変更*/
+	
 }

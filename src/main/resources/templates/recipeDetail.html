@@ -14,11 +14,7 @@
 	</a><br>
 	</recipe>
 	
-	<span>
-		カテゴリー：[[${recipe.category.name}]]
-	</span>
-	<br>
-	<span th:utext="${recipe.recipe}"></span>
+	<span th:utext="${recipe.recipe}" class="recipeDetail"></span>
 	
 	<form action="/recipes" method="get">
 		<button>一覧へ戻る</button>
