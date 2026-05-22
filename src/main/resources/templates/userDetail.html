@@ -8,11 +8,19 @@
 <body>
 	<header th:replace="~{header}"></header>
 	
-	<h1>[[${user.name}]]さんのページ</h1>
+	<h1 th:if="${@account.id != user.id}">
+		[[${user.name}]]さんのページ
+	</h1>
 	
-	<form action="/recipes" method="get">
-		<button>一覧へ戻る</button>
-	</form>
+	<h1 th:if="${@account.id == user.id}">
+		マイページ
+	</h1>
+	
+	<post th:if="${@account.id == user.id}">
+		<form action="/recipes/add" method="get">
+			<button>投稿</button>
+		</form>
+	</post>
 	
 	<!--検索-->
 	<form th:action="@{/recipes/user/detail/{id}(id = ${user.id})}" method="get">
@@ -30,6 +38,11 @@
 		th:text="${category.name}"></a>
 	</span>
 	</categories>
+	<p>
+	<form action="/recipes" method="get">
+		<button>一覧へ戻る</button>
+	</form>
+	</p>
 	<br>
 	
 	<recipes>
@@ -37,8 +50,14 @@
 			<tr>
 				<td>
 					<recipe>
-					<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
+						<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
 					</recipe>
+					<br>
+					<userName th:if="${@account.id == user.id}")>
+						<a th:href="@{/recipes/update/{id}(id = ${recipe.id})}">編集</a>
+						|
+						<a th:href="@{/recipes/delete/{id}(id = ${recipe.id})}">削除</a>
+					</userName>
 				</td>
 			</tr>
 		</table>

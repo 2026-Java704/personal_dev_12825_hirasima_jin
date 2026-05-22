@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Recipe;
 import com.example.demo.entity.User;
+import com.example.demo.model.Account;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserRepository;
@@ -22,16 +23,19 @@ public class RecipeController
 	private final RecipeRepository recipeRepository;
 	private final CategoryRepository categoryRepository;
 	private final UserRepository userRepository;
+	private final Account account;
 	
 	//コンストラクタインジェクション
 	public RecipeController(
 			RecipeRepository recipeRepository,
 			CategoryRepository categoryRepository, 
-			UserRepository userRepository)
+			UserRepository userRepository,
+			Account account)
 	{
 		this.recipeRepository = recipeRepository;
 		this.categoryRepository = categoryRepository;
 		this.userRepository = userRepository;
+		this.account = account;
 	}
 	
 	//レシピ一覧表示画面
@@ -66,7 +70,7 @@ public class RecipeController
 		return "recipeDetail";
 	}
 	
-	//レシピ詳細画面表示
+	//ユーザー詳細画面表示
 	@GetMapping("/recipes/user/detail/{id}")
 	public String userDetail(
 			@PathVariable int id,
@@ -95,8 +99,6 @@ public class RecipeController
 	@GetMapping("/recipes/add")
 	public String create(Model model)
 	{
-		
-		
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 		
@@ -121,6 +123,75 @@ public class RecipeController
 		
 		recipeRepository.save(recipe);
 		
-		return "redirect:/recipes";
+		return "redirect:/recipes/user/detail/" + userId ;
+	}
+	
+	//レシピ更新画面表示
+	@GetMapping("/recipes/update/{id}")
+	public String edit(
+			@PathVariable int id,
+			Model model)
+	{
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		
+		//更新するレシピ
+		Recipe recipe = recipeRepository.findById(id).get();
+		model.addAttribute("recipe", recipe);
+		
+		return "updateRecipe";
+	}
+	
+	//レシピ更新処理
+	@PostMapping("/recipes/update/{id}")
+	public String update(
+			@PathVariable int id,
+			@RequestParam(defaultValue = "") String name,
+			@RequestParam(defaultValue = "") Integer categoryId,
+			@RequestParam(defaultValue = "") String material,
+			@RequestParam(defaultValue = "") String recipeDetail,
+			@RequestParam(defaultValue = "") Integer userId)
+	{
+		//対応するユーザー・カテゴリーを取得
+		User user = userRepository.findById(userId).get();
+		Category category = categoryRepository.findById(categoryId).get();
+		
+		//投稿するレシピ
+		Recipe recipe = recipeRepository.findById(id).get();
+		recipe.setName(name);
+		recipe.setMaterial(material);
+		recipe.setRecipe(recipeDetail);
+		recipe.setCategory(category);
+		recipe.setUser(user);
+		
+		recipeRepository.save(recipe);
+		
+		return "redirect:/recipes/user/detail/" + userId ;
+	}
+	
+	//レシピの削除画面表示
+	@GetMapping("/recipes/delete/{id}")
+	public String deleteConfirm(
+			@PathVariable int id,
+			Model model)
+	{
+		//表示するレシピ
+		Recipe recipe = recipeRepository.findById(id).get();
+		model.addAttribute("recipe", recipe);
+		
+		return "deleteRecipe";
+	}
+	
+	//レシピ削除処理
+	@PostMapping("/recipes/delete/{id}")
+	public String delete(
+			@PathVariable int id,
+			Model model)
+	{
+		int userId = recipeRepository.findById(id).get().getUser().getId();
+		
+		recipeRepository.deleteById(id);
+		
+		return "redirect:/recipes/user/detail/" + userId;
 	}
 }

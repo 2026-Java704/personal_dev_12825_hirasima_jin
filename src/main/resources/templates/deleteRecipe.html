@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>削除確認</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="~{header}"></header>
+	
+	<Detail>
+		
+		<h1>本当に削除しますか？</h1>
+		
+		<h2 th:text="${recipe.name}"></h2>
+		
+		<table>
+			<caption>
+			<userName>
+				<a th:href="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}">
+					投稿者：[[${recipe.user.name}]]
+				</a>
+			</userName>
+			</caption>
+			
+			<tr>
+				<th>
+					材料
+				</th>
+				<th>
+					作り方
+				</th>
+			</tr>
+			<tr>
+				<td th:utext="${recipe.material}" class="recipeDetail">
+				</td>
+				<td th:utext="${recipe.recipe}" class="recipeDetail">
+				</td>
+			</tr>
+		</table>
+		
+		
+		<form th:action="@{/recipes/delete/{id}(id = ${recipe.id})}" method="post">
+			<button>削除する</button>
+		</form>
+		<form th:action="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}" method="get">
+			<button>やめる</button>
+		</form>
+		
+		</Detail>
+</body>
+</html>
