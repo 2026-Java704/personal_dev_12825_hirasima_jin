@@ -20,6 +20,7 @@ public class Recipe
 	private String name; //料理名
 	private String material; //材料
 	private String recipe; //レシピ内容
+	private Integer good;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -55,11 +56,15 @@ public class Recipe
 	}
 	
 	public String getRecipe() {
+		return recipe;
+	}
+	
+	public String getRecipeForText() {
 		return recipe.replaceAll("\n", "<br>");
 	}
 	
 	public void setRecipe(String recipe) {
-		this.recipe = recipe;
+		this.recipe = recipe.replaceAll("<br>", "\n");
 	}
 	
 	public User getUser() {
@@ -82,12 +87,28 @@ public class Recipe
 		return id;
 	}
 	public String getMaterial() {
+		return material;
+	}
+	
+	public String getMaterialForText() {
 		return material.replaceAll("\n", "<br>");
 	}
 	
 	public void setMaterial(String material) {
-		this.material = material;
+		this.material = material.replaceAll("<br>", "\n");
+	}
+	public Integer getGood() {
+		return good;
 	}
 	
-	
+	public void addGood(Integer good) {
+		
+		if(good == null)
+		{
+			good = 0;
+		}
+		this.good += good;
+		
+		System.out.println("addGood(" + good + ") = " + this.good);
+	}
 }

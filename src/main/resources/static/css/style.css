@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 /* 全体 */
 body:not(.recipeDetail)
 {
@@ -30,19 +29,16 @@ header h1
 }
 
 /* 表 */
-table 
+table
 {
     margin: 5px auto;
-    min-width: 400px;
 }
 
 /* 表線 */
-table, th, td 
+table, th, td
 {
 	border-collapse: collapse;
-	border-radius: 5px;
 	border: 1px solid #7d8bae;
-	border-radius: 5px;
 }
 
 /* ボタン */
@@ -68,6 +64,7 @@ button:hover
 	cursor: pointer;	/*カーソル変更*/
 }
 
+/*リンク*/
 a
 {
 	text-decoration: none;
@@ -101,7 +98,7 @@ textarea
 }
 
 /*テキストエリアフォーカス時*/
-.textarea:focus
+textarea:focus
 {
 	outline: 0;
 	border: 2px solid #2196f3;
@@ -181,11 +178,10 @@ userName a
 	color: rgb(51, 51, 51);
 }
 
-/*レシピ一覧表内リンク(マウスオーバー時)*/
+/*リンク(マウスオーバー時)*/
 a:hover
 {
-	color: rgb(30, 30, 30);
-	background-color: rgb(200, 200, 180)
+	color:rgb(240, 80, 80);
 }
 
 /*レシピ一覧表内テキスト*/
@@ -200,6 +196,7 @@ recipes table div
 /*レシピ詳細表示表*/
 Detail table td, th
 {
+	margin: 5px auto;
 	min-width: 200px;
 	color: rgb(51, 51, 51);
 }

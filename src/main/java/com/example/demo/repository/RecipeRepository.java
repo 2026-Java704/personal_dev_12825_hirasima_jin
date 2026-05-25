@@ -12,8 +12,8 @@ public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 {
 	//キーワード＆カテゴリー検索
 	@Query(value = "SELECT * FROM recipes WHERE "
-			+ "(name LIKE '%'||:keyword||'%' OR :keyword = '') "
-			+ "OR (material LIKE '%'||:keyword||'%') "
+			+ "((name LIKE '%'||:keyword||'%' OR :keyword = '') "
+			+ "OR (material LIKE '%'||:keyword||'%')) "
 			+ "AND (category_id = :categoryId OR :categoryId IS NULL)"
 			, nativeQuery = true)
 	List<Recipe> findByKeywordAndCategoryId(
@@ -32,7 +32,8 @@ public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 	//特定ユーザーIdによるキーワード＆カテゴリー検索
 	@Query(value = "SELECT * FROM recipes WHERE "
 			+ "(user_id = :userId) "
-			+ "AND(name LIKE '%'||:keyword||'%' OR :keyword = '') "
+			+ "AND ((name LIKE '%'||:keyword||'%' OR :keyword = '') "
+			+ "OR (material LIKE '%'||:keyword||'%')) "
 			+ "AND (category_id = :categoryId OR :categoryId IS NULL)"
 			, nativeQuery = true)
 	List<Recipe> findByUserId(

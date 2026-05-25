@@ -12,6 +12,15 @@
 	
 	<h1 th:text="${recipe.name}"></h1>
 	
+	<span>
+		カテゴリー：[[${recipe.category.name}]]　　
+		<form th:action="@{/recipes/detail/{id}(id = ${recipe.id})}" method="post">
+			いいね数：[[${recipe.good}]]
+			<input type="hidden" name="good" value="1">
+			<button>♡</button>
+		</form>
+	</span>
+	
 	<table>
 		<caption>
 		<userName>
@@ -30,9 +39,9 @@
 			</th>
 		</tr>
 		<tr>
-			<td th:utext="${recipe.material}" class="recipeDetail">
+			<td th:utext="${recipe.materialForText}" class="recipeDetail">
 			</td>
-			<td th:utext="${recipe.recipe}" class="recipeDetail">
+			<td th:utext="${recipe.recipeForText}" class="recipeDetail">
 			</td>
 		</tr>
 	</table>

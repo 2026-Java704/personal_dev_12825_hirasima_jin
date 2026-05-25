@@ -62,12 +62,35 @@ public class RecipeController
 	public String detail(
 			@PathVariable int id,
 			Model model)
-	{
+	{	
 		//表示するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
+		
 		model.addAttribute("recipe", recipe);
 		
 		return "recipeDetail";
+	}
+	
+	//レシピ詳細いいね処理
+	@PostMapping("/recipes/detail/{id}")
+	public String addGood(@PathVariable int id,
+			@RequestParam(defaultValue = "1") Integer good,
+			Model model)
+	{
+		//表示するレシピ
+		Recipe recipe = recipeRepository.findById(id).get();
+		
+		System.out.println("いいね！：" + good);
+		
+		recipe.addGood(good);
+		
+		System.out.println("総いいね！：" + recipe.getGood());
+		
+		recipeRepository.save(recipe);
+		
+		model.addAttribute("recipe", recipe);
+		
+		return "redirect:/recipes/detail/" + id;
 	}
 	
 	//ユーザー詳細画面表示
@@ -99,6 +122,13 @@ public class RecipeController
 	@GetMapping("/recipes/add")
 	public String create(Model model)
 	{
+		//ログインされていなければ
+		if(account.getId() == null)
+		{
+			//ログイン画面へ
+			return "redirect:/login";
+		}
+		
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 		
@@ -132,11 +162,26 @@ public class RecipeController
 			@PathVariable int id,
 			Model model)
 	{
+		//ログインされていなければ
+		if(account.getId() == null)
+		{
+			//ログイン画面へ
+			return "redirect:/login";
+		}
+		
 		List<Category> categories = categoryRepository.findAll();
-		model.addAttribute("categories", categories);
 		
 		//更新するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
+		
+		//ログイン情報とレシピのユーザー情報が一致していなければ
+		if(recipe.getUser().getId() != account.getId())
+		{
+			//ユーザーマイページに飛ばす
+			return "redirect:/recipes/user/detail/" + account.getId();
+		}
+		
+		model.addAttribute("categories", categories);
 		model.addAttribute("recipe", recipe);
 		
 		return "updateRecipe";
@@ -155,6 +200,8 @@ public class RecipeController
 		//対応するユーザー・カテゴリーを取得
 		User user = userRepository.findById(userId).get();
 		Category category = categoryRepository.findById(categoryId).get();
+		
+		System.out.println("input Val :" + material);
 		
 		//投稿するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
@@ -175,8 +222,23 @@ public class RecipeController
 			@PathVariable int id,
 			Model model)
 	{
+		//ログインされていなければ
+		if(account.getId() == null)
+		{
+			//ログイン画面へ
+			return "redirect:/login";
+		}
+		
 		//表示するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
+		
+		//ログイン情報とレシピのユーザー情報が一致していなければ
+		if(recipe.getUser().getId() != account.getId())
+		{
+			//ユーザーマイページに飛ばす
+			return "redirect:/recipes/user/detail/" + account.getId();
+		}
+		
 		model.addAttribute("recipe", recipe);
 		
 		return "deleteRecipe";

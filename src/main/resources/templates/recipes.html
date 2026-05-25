@@ -29,10 +29,11 @@
 	<recipes>
 	<table th:each="recipe:${recipes}">
 		<tr>
-			<td><recipe>
-				<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
+			<td>
+				<recipe>
+					<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
 				</recipe>
-				<br>
+					<br>
 				<userName>
 					<a th:href="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}">
 						投稿者：[[${recipe.user.name}]]
