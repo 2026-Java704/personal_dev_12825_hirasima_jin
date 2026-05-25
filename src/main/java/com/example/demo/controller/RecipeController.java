@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
+import com.example.demo.entity.GoodRecord;
 import com.example.demo.entity.Recipe;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.repository.GoodRecordRepository;
 import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -23,6 +25,7 @@ public class RecipeController
 	private final RecipeRepository recipeRepository;
 	private final CategoryRepository categoryRepository;
 	private final UserRepository userRepository;
+	private final GoodRecordRepository goodRecordRepository;
 	private final Account account;
 	
 	//コンストラクタインジェクション
@@ -30,11 +33,13 @@ public class RecipeController
 			RecipeRepository recipeRepository,
 			CategoryRepository categoryRepository, 
 			UserRepository userRepository,
+			GoodRecordRepository goodRecordRepository,
 			Account account)
 	{
 		this.recipeRepository = recipeRepository;
 		this.categoryRepository = categoryRepository;
 		this.userRepository = userRepository;
+		this.goodRecordRepository = goodRecordRepository;
 		this.account = account;
 	}
 	
@@ -66,6 +71,14 @@ public class RecipeController
 		//表示するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
 		
+		List<GoodRecord> goodRecords = goodRecordRepository.findByUserIdAndRecipeId(id, recipe.getUser().getId());
+		
+		//既にいいね済みか
+		if(goodRecords.size() >= 1)
+		{
+			
+		}
+		
 		model.addAttribute("recipe", recipe);
 		
 		return "recipeDetail";
@@ -80,12 +93,9 @@ public class RecipeController
 		//表示するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
 		
-		System.out.println("いいね！：" + good);
+		
 		
 		recipe.addGood(good);
-		
-		System.out.println("総いいね！：" + recipe.getGood());
-		
 		recipeRepository.save(recipe);
 		
 		model.addAttribute("recipe", recipe);
