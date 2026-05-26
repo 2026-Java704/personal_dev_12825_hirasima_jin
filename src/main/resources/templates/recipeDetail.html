@@ -13,11 +13,19 @@
 	<h1 th:text="${recipe.name}"></h1>
 	
 	<span>
-		カテゴリー：[[${recipe.category.name}]]　　
+		カテゴリー：[[${recipe.category.name}]]
 		<form th:action="@{/recipes/detail/{id}(id = ${recipe.id})}" method="post">
 			いいね数：[[${recipe.good}]]
+			
+			<span th:if="${@account.id} != null" th:unless="${isGood}">
 			<input type="hidden" name="good" value="1">
 			<button>♡</button>
+			</span>
+			
+			<span th:if="${isGood}">
+				<input type="hidden" name="good" value="-1">
+				<button>💔</button>
+			</span>
 		</form>
 	</span>
 	

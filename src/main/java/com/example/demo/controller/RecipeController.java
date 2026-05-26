@@ -71,14 +71,20 @@ public class RecipeController
 		//表示するレシピ
 		Recipe recipe = recipeRepository.findById(id).get();
 		
-		List<GoodRecord> goodRecords = goodRecordRepository.findByUserIdAndRecipeId(id, recipe.getUser().getId());
+		List<GoodRecord> goodRecords = goodRecordRepository.findByUserIdAndRecipeId(account.getId(), id);
+		
+		System.out.println("findRecords( " + account.getId() + ":" + id + ")");
+		
+		boolean isGood = false;
 		
 		//既にいいね済みか
 		if(goodRecords.size() >= 1)
 		{
-			
+			isGood = true;
+			System.out.println("いいね済み！：" + goodRecords.size());
 		}
 		
+		model.addAttribute("isGood", isGood);
 		model.addAttribute("recipe", recipe);
 		
 		return "recipeDetail";
@@ -97,6 +103,22 @@ public class RecipeController
 		
 		recipe.addGood(good);
 		recipeRepository.save(recipe);
+		
+		if(account.getId() != null)
+		{
+			List<GoodRecord> goodRecords = goodRecordRepository.findByUserIdAndRecipeId(account.getId(), id);
+			if(goodRecords.size() < 1)
+			{
+				GoodRecord goodRecord = new GoodRecord(userRepository.findById(account.getId()).get(),
+						recipe);
+				
+				goodRecordRepository.save(goodRecord);
+			}
+			else
+			{
+				goodRecordRepository.deleteAll(goodRecords);
+			}
+		}
 		
 		model.addAttribute("recipe", recipe);
 		

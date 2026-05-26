@@ -18,8 +18,8 @@ public interface GoodRecordRepository   extends JpaRepository<GoodRecord, Intege
 	
 	//ユーザー＆レシピ検索
 	@Query(value = "SELECT * FROM goodRecords WHERE "
-			+ "(user_id = :userId OR :userId IS NULL) "
-			+ "AND (recipe_id = :recipeId OR :recipeId IS NULL)"
+			+ "(user_id = :userId) "
+			+ "AND (recipe_id = :recipeId)"
 			, nativeQuery = true)
 	List<GoodRecord> findByUserIdAndRecipeId(
 			@Param("userId") Integer userId,
