@@ -42,7 +42,7 @@ table, th, td
 }
 
 /* ボタン */
-button 
+button:not(.goodForm button)
 {
 	margin: 2px;
 	padding: 5px 20px;
@@ -50,18 +50,41 @@ button
 	color: rgb(240, 240, 240);
 	border: 1px solid rgb(240, 120, 120);
 	border-radius: 5px;
-	height: 30px;
-	width:120px;
+	min-height: 30px;
+	min-width:120px;
 	font-weight: 700;
 	transition: 0.3s;
 }
 
-/* 送信ボタン(マウスオーバー時) */
+/* ボタン(マウスオーバー時) */
 button:hover 
 {
 	color: rgb(30, 30, 30);
 	background-color: #f1b2b2;
 	cursor: pointer;	/*カーソル変更*/
+}
+
+.goodForm button
+{
+	border-radius: 10px;
+	height: 30px;
+	width: 30px;
+	font-weight: 700;
+	transition: 0.3s;
+}
+
+.goodButton
+{
+	background-color:rgb(240, 200, 200);
+	color: rgb(80, 80, 80);
+	border: 1px solid rgb(240, 120, 120);
+}
+
+.rescButton
+{
+	background-color:rgb(240, 100, 100);
+	color: rgb(240, 240, 240);
+	border: 1px solid rgb(240, 120, 120);
 }
 
 /*リンク*/

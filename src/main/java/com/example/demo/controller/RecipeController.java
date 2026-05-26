@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +52,8 @@ public class RecipeController
 			Model model)
 	{
 		//キーワード絞り込み検索
-		List<Recipe> recipes = recipeRepository.findByKeywordAndCategoryId(keyword, categoryId);
+		Sort sort = Sort.by("good").descending();
+		List<Recipe> recipes = recipeRepository.findByKeywordAndCategoryId(keyword, categoryId, sort);
 		model.addAttribute("recipes", recipes);
 		//全カテゴリー情報を取得
 		List<Category> categories = categoryRepository.findAll();
@@ -142,12 +144,43 @@ public class RecipeController
 		model.addAttribute("categories", categories);
 		
 		//表示するユーザーが投稿したレシピ
-		List<Recipe> recipes = recipeRepository.findByUserId(id, keyword, categoryId);
+		Sort sort = Sort.by("good").descending();
+		List<Recipe> recipes = recipeRepository.findByUserId(id, keyword, categoryId, sort);
 		model.addAttribute("recipes", recipes);
 		
 		model.addAttribute("keyword", keyword);
 		
 		return "userDetail";
+	}
+	
+	
+	//いいね一覧画面表示
+	@GetMapping("/recipes/user/good/{id}")
+	public String userGoodDetail(
+			@PathVariable int id,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "") Integer categoryId,
+			Model model)
+	{
+		//表示するユーザー
+		User user = userRepository.findById(id).get();
+		model.addAttribute("user", user);
+		
+		//全カテゴリー情報を取得
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		
+		List<Integer> recipeIds = goodRecordRepository.findRecipeIdByUserId(id);
+		
+		System.out.println("レシピID:" + recipeIds.size());
+		
+		List<Recipe> recipes = recipeRepository.findAllById(recipeIds);
+		
+		System.out.println("レシピ:" + recipes.size());
+		
+		model.addAttribute("recipes", recipes);
+		
+		return "goodDetail";
 	}
 	
 	//レシピ投稿画面表示

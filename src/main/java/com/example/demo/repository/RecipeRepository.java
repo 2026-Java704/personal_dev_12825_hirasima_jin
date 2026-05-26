@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,7 +19,8 @@ public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 			, nativeQuery = true)
 	List<Recipe> findByKeywordAndCategoryId(
 			@Param("keyword") String keyword,
-			@Param("categoryId") Integer categoryId);
+			@Param("categoryId") Integer categoryId,
+			Sort sort);
 	
 	//ユーザー名検索
 	@Query(value = "SELECT * FROM recipes WHERE "
@@ -39,5 +41,6 @@ public interface RecipeRepository  extends JpaRepository<Recipe, Integer>
 	List<Recipe> findByUserId(
 			@Param("userId") Integer userId,
 			@Param("keyword") String keyword,
-			@Param("categoryId") Integer categoryId);
+			@Param("categoryId") Integer categoryId,
+			Sort sort);
 }

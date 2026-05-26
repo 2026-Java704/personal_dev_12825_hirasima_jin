@@ -13,6 +13,11 @@ public interface GoodRecordRepository   extends JpaRepository<GoodRecord, Intege
 	//ユーザーIDによる検索
 	List<GoodRecord> findByUserId(Integer userId);
 	
+	@Query(value = "SELECT recipe_id FROM goodRecords WHERE "
+			+ "user_id = :userId" 
+			, nativeQuery = true)
+	List<Integer> findRecipeIdByUserId(@Param("userId")Integer userId);
+	
 	//レシピIDによる検索
 	List<GoodRecord> findByRecipeId(Integer recipeId);
 	

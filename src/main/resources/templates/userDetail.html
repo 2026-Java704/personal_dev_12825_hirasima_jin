@@ -17,9 +17,8 @@
 	</h1>
 	
 	<post th:if="${@account.id == user.id}">
-		<form action="/recipes/add" method="get">
-			<button>投稿</button>
-		</form>
+		<button th:onclick="location.href='/recipes/add'">投稿</button>
+		<button th:onclick="|location.href='/recipes/user/good/__${user.id}__'|">いいねレシピ</button>
 	</post>
 	
 	<!--検索-->

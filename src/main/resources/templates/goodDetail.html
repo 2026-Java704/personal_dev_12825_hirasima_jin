@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> [[${user.name}]] </title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="~{header}"></header>
+	
+	<h1 th:if="${@account.id != user.id}">
+		[[${user.name}]]さんのいいね一覧ページ
+	</h1>
+	
+	<h1 th:if="${@account.id == user.id}">
+		いいね一覧ページ
+	</h1>
+	
+	<recipes>
+		<table th:each="recipe:${recipes}">
+			<tr>
+				<td>
+					<recipe>
+						<a th:href="@{/recipes/detail/{id}(id = ${recipe.id})}" th:text="${recipe.name}"></a>
+					</recipe>
+					<br>
+					<userName>
+						<a th:href="@{/recipes/user/detail/{id}(id = ${recipe.user.id})}">
+							投稿者：[[${recipe.user.name}]]
+						</a>
+					</userName>
+				</td>
+			</tr>
+		</table>
+	</recipes>
+	
+	<p>
+	<form action="/recipes" method="get">
+		<button>一覧へ戻る</button>
+	</form>
+	</p>
+	
+</body>
+</html>
